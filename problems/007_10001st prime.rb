@@ -11,7 +11,7 @@ start = Time.now
 N=10001
 
 def isPrime?(n)
-  (2..(n**0.5)).each{|i| return false if n%i == 0}
+  (3..(n**0.5)).step(2).each{|i| return false if n%i == 0}
   true
 end
 
