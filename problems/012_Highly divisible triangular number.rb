@@ -25,7 +25,6 @@ start = Time.now
 TARGET = 500
 
 def nbDivisors(n, divs=2)
-
   (2..n**0.5).each do |i|
     divs += 2 if n%i == 0
   end
