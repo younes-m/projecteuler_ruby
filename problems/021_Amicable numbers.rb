@@ -22,9 +22,7 @@ end
 
 (1..10000).each do |n|
   dn = d(n)
-  if dn != n and $pairs[dn] == n
-    $sum += n + dn
-  end
+  $sum += n + dn if dn != n and $pairs[dn] == n
 end
 
 puts $sum
