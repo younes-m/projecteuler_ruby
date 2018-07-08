@@ -12,6 +12,12 @@ HINT: Some products can be obtained in more than one way so be sure to only incl
 
 start = Time.now
 
+class Integer
+  def dcount
+    to_s.size
+  end
+end
+
 def is9pandigital?(n)
   n_string = n.to_s
   ("1".."9").each{|i| return false unless n_string.include? i}
@@ -19,33 +25,26 @@ def is9pandigital?(n)
 end
 
 def is9pandigital_product?(i, j)
-  n = i.to_s + j.to_s + (i*j).to_s
-  is9pandigital? n
+  is9pandigital? i.to_s + j.to_s + (i*j).to_s
 end
 
 def too_big?(i, j)
-  size = i.to_s.size + j.to_s.size + (i*j).to_s.size
-  size > 9
+  i.dcount + j.dcount + (i*j).dcount > 9
 end
 
 def test(i)
   j = i
   until too_big?(i,j) do
-    j+= 1
-    if is9pandigital_product?(i, j)
-      $products << i*j
-      puts "i=#{i} j=#{j} i*j=#{i*j}"
-    end
+    $products << i*j if is9pandigital_product?(i, j+=1)
   end
 end
 
 require 'set'
 $products = Set.new
+
 i = 1
-loop do
-  test i
-  i += 1
-  break if too_big?(i, 1)
+until too_big?(i,1) do
+  test i += 1
 end
 
 puts $products.sum
